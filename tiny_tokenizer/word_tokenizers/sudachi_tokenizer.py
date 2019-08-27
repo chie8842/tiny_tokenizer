@@ -54,6 +54,7 @@ class SudachiTokenizer(BaseTokenizer):
         for token in self.tokenizer.tokenize(text, self.mode):
             _token = Token(token.surface())
             if self.with_postag:
-                _token.postag = token.part_of_speech()[0]
+                _token.postag, *_postag2 = token.part_of_speech()
+                _token.postag2 = "\t".join(_postag2)
             result.append(_token)
         return result
